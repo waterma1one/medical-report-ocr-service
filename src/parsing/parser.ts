@@ -1,5 +1,10 @@
 import { parseReferenceRange, type ParsedRange } from "./referenceRange.js";
-import { cleanCell, normalizeLookupKey, stripDigitGroupSeparators } from "./text.js";
+import {
+  cleanCell,
+  normalizeLookupKey,
+  stripDigitGroupSeparators,
+  stripLeadingMarkers,
+} from "./text.js";
 import { resolveUnit } from "./units.js";
 
 export interface RawObservation {
@@ -508,11 +513,18 @@ type RowOutcome = { observation: RawObservation } | { reason: string };
 function rowToObservation(row: string[], columns: TableColumns, page: number): RowOutcome {
   const rawName = cellAt(row, columns.name);
   const rawValue = cellAt(row, columns.value);
-  const unit = cellAt(row, columns.unit) || undefined;
+  const { unit, flag: unitFlag } = splitUnitCell(cellAt(row, columns.unit));
   const range = parseReferenceRange(cellAt(row, columns.range));
 
   const name = normalizeTestName(rawName);
   if (name === null) return { reason: "implausible_name" };
+
+  // A result is a scalar, never a range. Age-stratified reference tables ("Newborn |
+  // 4.1 - 6.7 | 44-70") otherwise slip past the table gate and emit convincing-looking
+  // Observations whose "value" is actually a reference band.
+  if (rawValue !== "" && parseScalarValue(rawValue) === undefined && RANGE_LIKE.test(rawValue)) {
+    return { reason: "value_is_a_range" };
+  }
 
   if (rawValue === "") {
     // A row with a unit or a reference range names a test that was genuinely ordered;
@@ -534,6 +546,7 @@ function rowToObservation(row: string[], columns: TableColumns, page: number): R
   }
 
   const scalar = parseScalarValue(rawValue);
+  const flag = scalar?.flag ?? unitFlag;
 
   return {
     observation: {
@@ -544,13 +557,30 @@ function rowToObservation(row: string[], columns: TableColumns, page: number): R
         : {
             value: scalar.value,
             ...(scalar.comparator === undefined ? {} : { comparator: scalar.comparator }),
-            ...(scalar.flag === undefined ? {} : { flag: scalar.flag }),
           }),
+      ...(flag === undefined ? {} : { flag }),
       ...(unit === undefined ? {} : { unit }),
       ...(range === undefined ? {} : { range }),
       page,
     },
   };
+}
+
+/**
+ * Some labs print the abnormality flag in its own column, which Marker merges into the
+ * unit cell ("H mEq/L"). Left alone the unit fails UCUM resolution and the lab's own
+ * assertion is lost. The separating whitespace is required so a real unit starting
+ * with H or L (Hz, lm) is untouched.
+ */
+function splitUnitCell(cell: string): { unit?: string; flag?: RawObservation["flag"] } {
+  const trimmed = cell.trim();
+  if (trimmed === "") return {};
+
+  const match = /^(HH|LL|H|L)\s+(\S.*)$/.exec(trimmed);
+  if (match?.[1] && match[2]) {
+    return { unit: match[2].trim(), flag: FLAG_TO_CODE[match[1]] };
+  }
+  return { unit: trimmed };
 }
 
 /**
@@ -560,7 +590,7 @@ function rowToObservation(row: string[], columns: TableColumns, page: number): R
  * for itself, and discarding the row loses a real result.
  */
 function normalizeTestName(rawName: string): string | null {
-  const name = rawName.trim();
+  const name = stripLeadingMarkers(rawName);
   if (name.length < 2) return null;
   if (!CONTAINS_LETTER.test(name)) return null;
   // Reject a cell that is entirely digits and punctuation (dates, IDs, barcodes) —

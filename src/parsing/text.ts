@@ -48,6 +48,18 @@ export function cleanCell(raw: string): string {
   return out.replace(/\s+/g, " ").trim();
 }
 
+/**
+ * Strips leading presentation markers from a test name: tick marks reports use as a
+ * "performed" indicator, bullets, and the stray markdown heading marker Marker carries
+ * through on some rows.
+ *
+ * Applied only to names, never to value or range cells — `>`, `-` and `+` are
+ * meaningful there ("&gt;=40" is a lower bound, not a decorated 40).
+ */
+export function stripLeadingMarkers(value: string): string {
+  return value.replace(/^[\s✓✔☑√•·▪◦*#]+/, "").trim();
+}
+
 // Lookup key for unit and test-name maps: case- and punctuation-insensitive, with the
 // micro sign folded to ASCII so `µIU/mL` and `uIU/mL` collide on purpose.
 export function normalizeLookupKey(value: string): string {

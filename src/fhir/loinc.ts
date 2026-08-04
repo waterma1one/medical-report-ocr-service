@@ -112,10 +112,58 @@ function stripAnnotations(name: string): string {
     .trim();
 }
 
+/**
+ * Vocabulary of words that describe *how* a test was run rather than *what* was
+ * measured. Many labs append the method to the analyte name without parentheses
+ * ("SODIUM ISE direct", "MCV Calculated"), which no amount of bracket-stripping will
+ * remove.
+ *
+ * Some entries ("hemoglobin", "rbc", "count") are also analyte names in their own
+ * right. That is safe here because this list is only ever consulted against the
+ * portion being *dropped from the end* — a prefix is never discarded on its own.
+ */
+const METHOD_WORDS = new Set([
+  "modified", "jendrassik", "calculated", "calc", "kinetic", "ifcc", "uv", "without",
+  "p5p", "pyridoxal", "phosphate", "biuret", "assay", "bcg", "bcp", "pnpp",
+  "colorimetric", "colourimetric", "lkg", "uk", "ec", "ise", "direct", "indirect",
+  "sls", "hemoglobin", "haemoglobin", "hydrodynamically", "focused", "dc", "detection",
+  "rbc", "pulse", "height", "flowcytometry", "flow", "cytometry", "microscopy",
+  "photo", "optical", "clot", "eclia", "clia", "elisa", "cmia", "photometry",
+  "impedance", "electrical", "automated", "enzymatic", "immunoinhibition", "arsenazo",
+  "iii", "molybdate", "urease", "uricase", "jaffe", "oxidation", "biotret", "hplc",
+  "ngsp", "certified", "level", "levels", "method", "principle", "sandwich",
+  "estimation", "count", "cho-pod", "gpo-pod", "hexokinase", "turbidimetry",
+  "nephelometry", "spectrophotometry", "potentiometry", "chemiluminescence",
+]);
+
+function isMethodOnly(words: string[]): boolean {
+  if (words.length === 0) return false;
+  return words.every((word) => {
+    const cleaned = word.replace(/[(),.:;]/g, "").toLowerCase();
+    return cleaned === "" || METHOD_WORDS.has(cleaned);
+  });
+}
+
 export function lookupLoinc(testName: string): LoincCode | undefined {
   const direct = LOOKUP.get(loincKey(testName));
   if (direct) return direct;
 
   const stripped = stripAnnotations(testName);
-  return stripped === testName ? undefined : LOOKUP.get(loincKey(stripped));
+  if (stripped !== testName) {
+    const viaAnnotations = LOOKUP.get(loincKey(stripped));
+    if (viaAnnotations) return viaAnnotations;
+  }
+
+  // Longest-prefix match, accepted only when everything dropped is method vocabulary.
+  // Without that guard "ALBUMIN : GLOBULIN RATIO Calculated" would happily shorten to
+  // "ALBUMIN" and report the wrong analyte — a far worse outcome than no code at all.
+  const words = stripped.split(/\s+/).filter(Boolean);
+  for (let take = words.length - 1; take >= 1; take--) {
+    const dropped = words.slice(take);
+    if (!isMethodOnly(dropped)) continue;
+    const candidate = LOOKUP.get(loincKey(words.slice(0, take).join(" ")));
+    if (candidate) return candidate;
+  }
+
+  return undefined;
 }

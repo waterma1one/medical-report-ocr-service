@@ -27,6 +27,8 @@ const UCUM_BY_PRINTED_UNIT = new Map<string, string>(
     "million/mm3": "10*6/uL",
     "million/cumm": "10*6/uL",
     "mill/cumm": "10*6/uL",
+    "mil/cumm": "10*6/uL",
+    "mill/mm3": "10*6/uL",
     "10^6/ul": "10*6/uL",
     "thou/mm3": "10*3/uL",
     "thou/cumm": "10*3/uL",
@@ -44,6 +46,7 @@ const UCUM_BY_PRINTED_UNIT = new Map<string, string>(
 
     // Enzyme activity and international units
     "u/l": "U/L",
+    "u/lt": "U/L",
     "iu/l": "[IU]/L",
     "uiu/ml": "u[IU]/mL",
     // mIU/L is numerically equal to µIU/mL but is a different expression. Emitting
@@ -66,6 +69,7 @@ const UCUM_BY_PRINTED_UNIT = new Map<string, string>(
     "%": "%",
     fl: "fL",
     pg: "pg",
+    pgm: "pg",
     "mm/hr": "mm/h",
     "mm/1sthr": "mm/h",
     sec: "s",
