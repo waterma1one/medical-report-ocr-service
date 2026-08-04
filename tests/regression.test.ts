@@ -166,6 +166,39 @@ describe("regression: single-analyte and all-comparator panels must parse", () =
   });
 });
 
+describe("regression: a non-UCUM index unit must not sink the gate", () => {
+  // Immunoassay panels commonly report a Cut-off Index ("COI") or Signal/Cutoff
+  // ratio instead of a physical unit. Neither resolves to UCUM, so the unit-column
+  // gate must fall back to recognising them by name rather than requiring a UCUM hit.
+  it("parses a single-row table whose unit is COI", () => {
+    const observations = parseObservations(
+      table(
+        "| Investigation | Result | Unit | Biological Reference |",
+        "|---|---|---|---|",
+        "| HIV I & II Antibodies (ELISA) | 0.08 | COI | Non Reactive: < 0.90 |",
+      ),
+    );
+    expect(observations).toHaveLength(1);
+    expect(observations[0]).toMatchObject({ value: 0.08, unit: "COI" });
+  });
+
+  it("still rejects a risk-category table with plain-English category cells", () => {
+    // The fix must not widen the gate into matching ordinary words like "High" or
+    // "Deficient" as a unit — only explicit index/ratio terms and slash-containing
+    // tokens qualify.
+    expect(
+      parseObservations(
+        table(
+          "| Test Name | Results | Units | Ref. Interval |",
+          "|---|---|---|---|",
+          "| High | <70 | <100 | >=70 |",
+          "| Moderate | <100 | <130 | >=100 |",
+        ),
+      ),
+    ).toEqual([]);
+  });
+});
+
 describe("regression: a serial-number column must not become the value column", () => {
   it("uses the real result column, not the row index", () => {
     const observations = parseObservations(

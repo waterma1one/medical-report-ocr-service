@@ -345,7 +345,19 @@ function classifyColumns(rows: string[][], headerIndex: number): TableColumns | 
   const columnCount = columnCountOf(rows);
   if (columnCount < 2) return null;
 
-  const unitColumn = findUnitColumn(dataRows, columnCount, new Set());
+  // UCUM-resolved first; fall back to a narrow, non-UCUM pseudo-unit check for gating
+  // purposes too, not just the cosmetic column assignment below. Immunoassay panels
+  // commonly report a dimensionless index ("COI", "S/CO") as their unit — a real
+  // reporting convention, not a UCUM quantity — and without this fallback the single
+  // legitimate result row in such a table never clears the gate at all.
+  //
+  // This deliberately does NOT use the broader isUnitShaped check used later for
+  // cosmetic column assignment: that check matches any bare word, including plain
+  // English category labels ("High", "Deficient", "Moderate"), which would reopen the
+  // exact risk-category and banded-reference tables the gate exists to keep out.
+  const unitColumn =
+    findUnitColumn(dataRows, columnCount, new Set()) ??
+    pickColumn(dataRows, columnCount, new Set(), isPseudoUnitShaped);
   const valueColumn = findValueColumn(dataRows, columnCount, unitColumn !== undefined);
   if (valueColumn === null) return null;
 
@@ -459,6 +471,17 @@ function isUnitShaped(cell: string): boolean {
   if (cell === "" || cell.length > 20) return false;
   if (PLAIN_NUMBER.test(cell)) return false;
   return /^[A-Za-z%µμ][A-Za-z0-9%µμ/^*.[\]{}_-]*$/.test(cell);
+}
+
+// Non-UCUM index/ratio terms immunoassay panels report as a "unit". Deliberately a
+// short, explicit allowlist rather than a shape check: a shape check permissive
+// enough to catch "COI" is also permissive enough to catch "High" or "Deficient",
+// which is precisely what the gate exists to reject.
+const PSEUDO_UNIT_TERMS = new Set(["coi", "s/co", "index", "titre", "titer", "ratio", "isr"]);
+
+function isPseudoUnitShaped(cell: string): boolean {
+  if (cell.includes("/") && isUnitShaped(cell)) return true;
+  return PSEUDO_UNIT_TERMS.has(normalizeLookupKey(cell));
 }
 
 function pickColumn(
