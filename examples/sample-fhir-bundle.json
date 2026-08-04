@@ -1,0 +1,2550 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "timestamp": "2026-08-04T17:37:28.875Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:898010dd-2a5a-4a18-8d1b-5a23a9689155",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "898010dd-2a5a-4a18-8d1b-5a23a9689155",
+        "status": "preliminary",
+        "code": {
+          "text": "Creatinine (Modified Jaffe,Kinetic)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2160-0",
+              "display": "Creatinine"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 1,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.7,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 1.3,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d9db59a3-9b6d-44f5-a9ad-72b7f78a8b67",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "d9db59a3-9b6d-44f5-a9ad-72b7f78a8b67",
+        "status": "preliminary",
+        "code": {
+          "text": "GFR Estimated (CKD EPI Equation 2021)"
+        },
+        "valueQuantity": {
+          "value": 107,
+          "unit": "mL/min/1.73m2",
+          "system": "http://unitsofmeasure.org",
+          "code": "mL/min/{1.73_m2}"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 59,
+              "unit": "mL/min/1.73m2",
+              "system": "http://unitsofmeasure.org",
+              "code": "mL/min/{1.73_m2}"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:df1f2984-b1d7-42c7-82be-b5ec632ea04d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "df1f2984-b1d7-42c7-82be-b5ec632ea04d",
+        "status": "preliminary",
+        "code": {
+          "text": "GFR Category (KDIGO Guideline 2012)"
+        },
+        "valueString": "G1",
+        "note": [
+          {
+            "text": "VALUE_NOT_A_CLEAN_NUMBER: Value \"G1\" is not a plain number"
+          },
+          {
+            "text": "MISSING_UNIT: Unit is missing"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8b12fdfc-4500-4383-8c45-d858bbcc3ad2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "8b12fdfc-4500-4383-8c45-d858bbcc3ad2",
+        "status": "preliminary",
+        "code": {
+          "text": "Urea (Urease UV)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3094-0",
+              "display": "Urea nitrogen"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 40,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 13,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 43,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a5f5ff77-3f3e-4719-bc9b-b8e579002645",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a5f5ff77-3f3e-4719-bc9b-b8e579002645",
+        "status": "preliminary",
+        "code": {
+          "text": "Urea Nitrogen Blood (Calculated)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3094-0",
+              "display": "Urea nitrogen"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 18.68,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 6,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 20,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9bb25530-3a56-4af9-b907-a312f42a7360",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9bb25530-3a56-4af9-b907-a312f42a7360",
+        "status": "preliminary",
+        "code": {
+          "text": "BUN/Creatinine Ratio (Calculated)"
+        },
+        "valueQuantity": {
+          "value": 19
+        },
+        "note": [
+          {
+            "text": "MISSING_UNIT: Unit is missing"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f4ed7de4-63b5-438b-bb15-c6d885da73db",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f4ed7de4-63b5-438b-bb15-c6d885da73db",
+        "status": "preliminary",
+        "code": {
+          "text": "Uric Acid (Uricase)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3084-1",
+              "display": "Uric acid"
+            }
+          ]
+        },
+        "dataAbsentReason": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+              "code": "unknown",
+              "display": "Unknown"
+            }
+          ]
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 3.5,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 7.2,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "note": [
+          {
+            "text": "VALUE_MISSING: The test was reported but no result value could be read"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8f4b48ad-51ff-44db-bd88-958bc32b9529",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "8f4b48ad-51ff-44db-bd88-958bc32b9529",
+        "status": "preliminary",
+        "code": {
+          "text": "AST (SGOT) (IFCC without P5P)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1920-8",
+              "display": "AST"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 50,
+          "unit": "U/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "U/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 15,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            },
+            "high": {
+              "value": 40,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "H",
+                "display": "High"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d4e0e880-37f4-4343-a5a8-9ca5f2784af7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "d4e0e880-37f4-4343-a5a8-9ca5f2784af7",
+        "status": "preliminary",
+        "code": {
+          "text": "ALT (SGPT) (IFCC without P5P)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1742-6",
+              "display": "ALT"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 40,
+          "unit": "U/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "U/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 10,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            },
+            "high": {
+              "value": 49,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a3e379ba-59be-45ba-bd3e-92ebd1f411cd",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a3e379ba-59be-45ba-bd3e-92ebd1f411cd",
+        "status": "preliminary",
+        "code": {
+          "text": "GGTP (IFCC)"
+        },
+        "valueQuantity": {
+          "value": 50,
+          "unit": "U/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "U/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            },
+            "high": {
+              "value": 73,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1fc15a8b-5dca-44cc-af97-81325d00bd0b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1fc15a8b-5dca-44cc-af97-81325d00bd0b",
+        "status": "preliminary",
+        "code": {
+          "text": "Alkaline Phosphatase (ALP) (IFCC-AMP)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "6768-6",
+              "display": "Alkaline phosphatase"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 100,
+          "unit": "U/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "U/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 30,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            },
+            "high": {
+              "value": 120,
+              "unit": "U/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9e49ec50-8f4a-4135-bb62-af52dd13197c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9e49ec50-8f4a-4135-bb62-af52dd13197c",
+        "status": "preliminary",
+        "code": {
+          "text": "Bilirubin Total (Oxidation)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1975-2",
+              "display": "Bilirubin, total"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 1,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.3,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 1.2,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f770e4f1-e5ed-4782-960d-84098ba851ef",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f770e4f1-e5ed-4782-960d-84098ba851ef",
+        "status": "preliminary",
+        "code": {
+          "text": "Bilirubin Direct (Oxidation)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1968-7",
+              "display": "Bilirubin, direct"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 0.2,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 0.3,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f3937bae-467c-4021-aceb-b63b85386aba",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f3937bae-467c-4021-aceb-b63b85386aba",
+        "status": "preliminary",
+        "code": {
+          "text": "Bilirubin Indirect (Calculated)"
+        },
+        "valueQuantity": {
+          "value": 0.8,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 1.1,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:199d7eee-e663-4813-8825-4ed690fd680a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "199d7eee-e663-4813-8825-4ed690fd680a",
+        "status": "preliminary",
+        "code": {
+          "text": "Total Protein (Biotret)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2885-2",
+              "display": "Protein, total"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 8,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 5.7,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            },
+            "high": {
+              "value": 8.2,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2101a5eb-05e4-44c8-9387-a78a52e72443",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "2101a5eb-05e4-44c8-9387-a78a52e72443",
+        "status": "preliminary",
+        "code": {
+          "text": "Albumin (BCG)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1751-7",
+              "display": "Albumin"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 3.2,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            },
+            "high": {
+              "value": 4.8,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b3057b9f-d368-437b-93d3-4d6fb107c455",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b3057b9f-d368-437b-93d3-4d6fb107c455",
+        "status": "preliminary",
+        "code": {
+          "text": "A : G Ratio (Calculated)"
+        },
+        "valueQuantity": {
+          "value": 1
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.9
+            },
+            "high": {
+              "value": 2
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ],
+        "note": [
+          {
+            "text": "MISSING_UNIT: Unit is missing"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb6ab31b-82f3-4214-bb4f-bcf7da9458c7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb6ab31b-82f3-4214-bb4f-bcf7da9458c7",
+        "status": "preliminary",
+        "code": {
+          "text": "Globulin(Calculated)"
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "gm/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 2,
+              "unit": "gm/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            },
+            "high": {
+              "value": 3.5,
+              "unit": "gm/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "H",
+                "display": "High"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1a46e9d5-9b88-42c4-81d9-91bc5cf99f2b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1a46e9d5-9b88-42c4-81d9-91bc5cf99f2b",
+        "status": "preliminary",
+        "code": {
+          "text": "Calcium, Total (Arsenazo III)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "17861-6",
+              "display": "Calcium, total"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 9,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 8.7,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 10.4,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7a38b23f-9d37-4a2d-a731-344bc691b6fa",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "7a38b23f-9d37-4a2d-a731-344bc691b6fa",
+        "status": "preliminary",
+        "code": {
+          "text": "Phosphorus (Molybdate UV)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2777-1",
+              "display": "Phosphate"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 2.5,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "high": {
+              "value": 5.1,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:17f2a515-ad4c-4e3e-8e54-32bc050ecf2c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "17f2a515-ad4c-4e3e-8e54-32bc050ecf2c",
+        "status": "preliminary",
+        "code": {
+          "text": "Sodium (Indirect ISE)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2951-2",
+              "display": "Sodium"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 140,
+          "unit": "mEq/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "meq/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 136,
+              "unit": "mEq/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "meq/L"
+            },
+            "high": {
+              "value": 145,
+              "unit": "mEq/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "meq/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:98c284f7-a495-4097-ac9f-ca0d50f2a7c1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "98c284f7-a495-4097-ac9f-ca0d50f2a7c1",
+        "status": "preliminary",
+        "code": {
+          "text": "Potassium (Indirect ISE)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2823-3",
+              "display": "Potassium"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "mEq/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "meq/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 3.5,
+              "unit": "mEq/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "meq/L"
+            },
+            "high": {
+              "value": 5.1,
+              "unit": "mEq/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "meq/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:07f90016-11fa-4437-9061-eb366382c194",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "07f90016-11fa-4437-9061-eb366382c194",
+        "status": "preliminary",
+        "code": {
+          "text": "Chloride (Indirect ISE)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2075-0",
+              "display": "Chloride"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 100,
+          "unit": "mEq/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "meq/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 98,
+              "unit": "mEq/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "meq/L"
+            },
+            "high": {
+              "value": 107,
+              "unit": "mEq/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "meq/L"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fefe7ad1-2713-4620-83ae-8b6b9257a787",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "fefe7ad1-2713-4620-83ae-8b6b9257a787",
+        "status": "preliminary",
+        "code": {
+          "text": "Cholesterol, Total (CHO-POD)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2093-3",
+              "display": "Cholesterol"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 100,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 200,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ba2f00f2-388a-45f6-90dc-7203be374008",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ba2f00f2-388a-45f6-90dc-7203be374008",
+        "status": "preliminary",
+        "code": {
+          "text": "Triglycerides (GPO-POD)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2571-8",
+              "display": "Triglycerides"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 100,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 150,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:84dec13a-4eee-49c0-90be-430d87222111",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "84dec13a-4eee-49c0-90be-430d87222111",
+        "status": "preliminary",
+        "code": {
+          "text": "HDL Cholesterol (Enz Immunoinhibition)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2085-9",
+              "display": "HDL Cholesterol"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 25,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 40,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "L",
+                "display": "Low"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e14cfaff-8377-4df2-a76c-6377cce40029",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "e14cfaff-8377-4df2-a76c-6377cce40029",
+        "status": "preliminary",
+        "code": {
+          "text": "LDL Cholesterol, Calculated (Calculated)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "13457-7",
+              "display": "LDL Cholesterol"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 50,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 100,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ab8f23da-75ac-4ec8-b053-d2045816408e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ab8f23da-75ac-4ec8-b053-d2045816408e",
+        "status": "preliminary",
+        "code": {
+          "text": "VLDL Cholesterol, Calculated (Calculated)"
+        },
+        "valueQuantity": {
+          "value": 20,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 30,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4a7daa4f-dbc8-4c2c-aeb0-46a10884bb84",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4a7daa4f-dbc8-4c2c-aeb0-46a10884bb84",
+        "status": "preliminary",
+        "code": {
+          "text": "Non-HDL Cholesterol (Calculated)"
+        },
+        "valueQuantity": {
+          "value": 70,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 130,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:62574455-6f2b-4616-b0db-8a3a99611bc6",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "62574455-6f2b-4616-b0db-8a3a99611bc6",
+        "status": "preliminary",
+        "code": {
+          "text": "T3, Total",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3053-6",
+              "display": "Triiodothyronine (T3)"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 1,
+          "unit": "ng/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "ng/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.6,
+              "unit": "ng/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "ng/dL"
+            },
+            "high": {
+              "value": 1.81,
+              "unit": "ng/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "ng/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4e6cfe85-a595-4787-9843-bbf8677040a2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4e6cfe85-a595-4787-9843-bbf8677040a2",
+        "status": "preliminary",
+        "code": {
+          "text": "T4, Total",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3026-2",
+              "display": "Thyroxine (T4)"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 7,
+          "unit": "\u03bcg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "ug/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 5.01,
+              "unit": "\u03bcg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "ug/dL"
+            },
+            "high": {
+              "value": 12.45,
+              "unit": "\u03bcg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "ug/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1b2c500c-bf1e-4347-bc79-9ef95203cd7d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1b2c500c-bf1e-4347-bc79-9ef95203cd7d",
+        "status": "preliminary",
+        "code": {
+          "text": "TSH",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3016-3",
+              "display": "TSH"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 3,
+          "unit": "\u03bcIU/mL",
+          "system": "http://unitsofmeasure.org",
+          "code": "u[IU]/mL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.55,
+              "unit": "\u03bcIU/mL",
+              "system": "http://unitsofmeasure.org",
+              "code": "u[IU]/mL"
+            },
+            "high": {
+              "value": 4.78,
+              "unit": "\u03bcIU/mL",
+              "system": "http://unitsofmeasure.org",
+              "code": "u[IU]/mL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:301a5a48-4ebb-4ce2-9f74-1eafe04942c8",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "301a5a48-4ebb-4ce2-9f74-1eafe04942c8",
+        "status": "preliminary",
+        "code": {
+          "text": "HbA1c",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 10,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 4,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 5.6,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "H",
+                "display": "High"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e1e4c6b8-a396-4d1f-b944-bbd68e61ace4",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "e1e4c6b8-a396-4d1f-b944-bbd68e61ace4",
+        "status": "preliminary",
+        "code": {
+          "text": "Estimated average glucose (eAG)"
+        },
+        "valueQuantity": {
+          "value": 240,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bf103efc-b555-4248-8461-a3cae78c95de",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bf103efc-b555-4248-8461-a3cae78c95de",
+        "status": "preliminary",
+        "code": {
+          "text": "Hemoglobin (Photometry)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "718-7",
+              "display": "Hemoglobin"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 15,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 13,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            },
+            "high": {
+              "value": 17,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:87444c8a-273a-4296-a48b-7bf13502aa01",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "87444c8a-273a-4296-a48b-7bf13502aa01",
+        "status": "preliminary",
+        "code": {
+          "text": "Packed Cell Volume (PCV) (Calculated)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4544-3",
+              "display": "Hematocrit"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 45,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 40,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 50,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:13b401da-6ca1-432c-ac27-380a008ad185",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "13b401da-6ca1-432c-ac27-380a008ad185",
+        "status": "preliminary",
+        "code": {
+          "text": "RBC Count (Electrical Impedance)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "789-8",
+              "display": "Erythrocytes"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 5,
+          "unit": "million/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*6/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 4.5,
+              "unit": "million/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*6/uL"
+            },
+            "high": {
+              "value": 5.5,
+              "unit": "million/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*6/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b8b9ca02-698c-407f-b966-ff40e16f3db7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b8b9ca02-698c-407f-b966-ff40e16f3db7",
+        "status": "preliminary",
+        "code": {
+          "text": "MCV (Electrical Impedance)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "787-2",
+              "display": "MCV"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 100,
+          "unit": "fL",
+          "system": "http://unitsofmeasure.org",
+          "code": "fL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 83,
+              "unit": "fL",
+              "system": "http://unitsofmeasure.org",
+              "code": "fL"
+            },
+            "high": {
+              "value": 101,
+              "unit": "fL",
+              "system": "http://unitsofmeasure.org",
+              "code": "fL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb1baf50-6ac5-42a4-9780-49676a60308d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb1baf50-6ac5-42a4-9780-49676a60308d",
+        "status": "preliminary",
+        "code": {
+          "text": "MCH (Calculated)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "785-6",
+              "display": "MCH"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 30,
+          "unit": "pg",
+          "system": "http://unitsofmeasure.org",
+          "code": "pg"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 27,
+              "unit": "pg",
+              "system": "http://unitsofmeasure.org",
+              "code": "pg"
+            },
+            "high": {
+              "value": 32,
+              "unit": "pg",
+              "system": "http://unitsofmeasure.org",
+              "code": "pg"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b0d427a7-fe93-49f1-8eeb-deba2766498e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b0d427a7-fe93-49f1-8eeb-deba2766498e",
+        "status": "preliminary",
+        "code": {
+          "text": "MCHC (Calculated)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "786-4",
+              "display": "MCHC"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 33,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 31.5,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            },
+            "high": {
+              "value": 34.5,
+              "unit": "g/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/dL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d0adcdec-66f5-46f0-a6fb-bba56099359f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "d0adcdec-66f5-46f0-a6fb-bba56099359f",
+        "status": "preliminary",
+        "code": {
+          "text": "Red Cell Distribution Width (RDW) (Electrical Impedance)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "788-0",
+              "display": "RDW"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 12,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 11.6,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 14,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6f63294f-2c23-4c03-8780-285cce989930",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "6f63294f-2c23-4c03-8780-285cce989930",
+        "status": "preliminary",
+        "code": {
+          "text": "Total Leukocyte Count (TLC) (Electrical Impedance)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "6690-2",
+              "display": "Leukocytes"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 5,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 4,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 10,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a746a2d9-f0fa-45b5-b3de-cb27031690fe",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a746a2d9-f0fa-45b5-b3de-cb27031690fe",
+        "status": "preliminary",
+        "code": {
+          "text": "Segmented Neutrophils",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "770-8",
+              "display": "Neutrophils"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 50,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 40,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 80,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:51465bb8-4999-4c93-9878-88220ee12027",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "51465bb8-4999-4c93-9878-88220ee12027",
+        "status": "preliminary",
+        "code": {
+          "text": "Lymphocytes",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "736-9",
+              "display": "Lymphocytes"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 40,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 20,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 40,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:56b1c915-f816-430e-b10e-5b02b629422c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "56b1c915-f816-430e-b10e-5b02b629422c",
+        "status": "preliminary",
+        "code": {
+          "text": "Monocytes",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "5905-5",
+              "display": "Monocytes"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 5,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 2,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 10,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4d760509-c6f7-4af4-8d4e-0805f34e6f9b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4d760509-c6f7-4af4-8d4e-0805f34e6f9b",
+        "status": "preliminary",
+        "code": {
+          "text": "Eosinophils",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "713-8",
+              "display": "Eosinophils"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 1,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            },
+            "high": {
+              "value": 6,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:87bfa478-6efe-4a39-b19e-5864b2a8c78f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "87bfa478-6efe-4a39-b19e-5864b2a8c78f",
+        "status": "preliminary",
+        "code": {
+          "text": "Basophils",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "706-2",
+              "display": "Basophils"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 1,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 2,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1db82ee4-7890-4e8b-bbd5-f1629f3a7c02",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "1db82ee4-7890-4e8b-bbd5-f1629f3a7c02",
+        "status": "preliminary",
+        "code": {
+          "text": "Neutrophils",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "770-8",
+              "display": "Neutrophils"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 2.5,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 2,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 7,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b41b77dd-7de6-4e8f-a693-8b2898bdff37",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b41b77dd-7de6-4e8f-a693-8b2898bdff37",
+        "status": "preliminary",
+        "code": {
+          "text": "Lymphocytes",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "736-9",
+              "display": "Lymphocytes"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 2,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 1,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 3,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:67d1ab62-341f-4b15-8c23-cd2376bdb4ae",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "67d1ab62-341f-4b15-8c23-cd2376bdb4ae",
+        "status": "preliminary",
+        "code": {
+          "text": "Monocytes",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "5905-5",
+              "display": "Monocytes"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 0.25,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.2,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 1,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4edc625d-afc7-44c9-90db-a3a6e5c65552",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4edc625d-afc7-44c9-90db-a3a6e5c65552",
+        "status": "preliminary",
+        "code": {
+          "text": "Eosinophils",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "713-8",
+              "display": "Eosinophils"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 0.2,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.02,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 0.5,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4bcad239-fa5e-497a-9421-e39f2b727627",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4bcad239-fa5e-497a-9421-e39f2b727627",
+        "status": "preliminary",
+        "code": {
+          "text": "Basophils",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "706-2",
+              "display": "Basophils"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 0.05,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.02,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 0.1,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:557caf92-8a5a-48eb-82b5-76ffc30b9878",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "557caf92-8a5a-48eb-82b5-76ffc30b9878",
+        "status": "preliminary",
+        "code": {
+          "text": "Platelet Count (Electrical impedance)",
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "777-3",
+              "display": "Platelets"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 151,
+          "unit": "thou/mm3",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*3/uL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 150,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            },
+            "high": {
+              "value": 410,
+              "unit": "thou/mm3",
+              "system": "http://unitsofmeasure.org",
+              "code": "10*3/uL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3dc81bd0-3b29-479c-8eb7-ae9ccb45c361",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "3dc81bd0-3b29-479c-8eb7-ae9ccb45c361",
+        "status": "preliminary",
+        "code": {
+          "text": "Mean Platelet Volume (Electrical Impedance)"
+        },
+        "valueQuantity": {
+          "value": 6.5,
+          "unit": "fL",
+          "system": "http://unitsofmeasure.org",
+          "code": "fL"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 6.5,
+              "unit": "fL",
+              "system": "http://unitsofmeasure.org",
+              "code": "fL"
+            },
+            "high": {
+              "value": 12,
+              "unit": "fL",
+              "system": "http://unitsofmeasure.org",
+              "code": "fL"
+            }
+          }
+        ],
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "N",
+                "display": "Normal"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "source": "ocr-extraction",
+    "needsReview": [
+      "GFR Category (KDIGO Guideline 2012)",
+      "BUN/Creatinine Ratio (Calculated)",
+      "Uric Acid (Uricase)",
+      "A : G Ratio (Calculated)"
+    ]
+  }
+}
