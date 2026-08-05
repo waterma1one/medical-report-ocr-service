@@ -84,6 +84,52 @@ describe("parseObservations — noise rejection", () => {
     expect(parseObservations(md)).toEqual([]);
   });
 
+  it("accepts a wholly qualitative panel when the header names both columns", () => {
+    // A blood group report carries no numbers and no units anywhere, so neither of the
+    // numeric acceptance paths can fire. The explicit header is what distinguishes it
+    // from a demographics block.
+    const md = [
+      "| INVESTIGATION | RESULT | UNIT | BIOLOGICAL REFERENCE INTERVAL |",
+      "|---|---|---|---|",
+      "| <b>BLOOD GROUP BY GEL METHOD</b> |  |  |  |",
+      "| ABO SYSTEM | O |  |  |",
+      "| RHESUS SYSTEM | POSITIVE |  |  |",
+      "| BLOOD GROUP | O POSITIVE |  |  |",
+    ].join("\n");
+
+    const observations = parseObservations(md);
+    expect(observations.map((o) => o.name)).toEqual([
+      "ABO SYSTEM",
+      "RHESUS SYSTEM",
+      "BLOOD GROUP",
+    ]);
+    expect(observations[0]?.rawValue).toBe("O");
+    expect(observations[0]?.value).toBeUndefined();
+  });
+
+  it("rejects a qualitative table whose header names only one of the two columns", () => {
+    const md = [
+      "| INVESTIGATION | COMMENTS | NOTE |",
+      "|---|---|---|",
+      "| Sample condition | Adequate |  |",
+      "| Storage | Refrigerated |  |",
+    ].join("\n");
+
+    expect(parseObservations(md)).toEqual([]);
+  });
+
+  it("drops a METHOD row, which names the assay rather than a result", () => {
+    const md = [
+      "| INVESTIGATION | RESULT | UNIT | BIOLOGICAL REFERENCE INTERVAL |",
+      "|---|---|---|---|",
+      "| ABO SYSTEM | O |  |  |",
+      "| RHESUS SYSTEM | POSITIVE |  |  |",
+      "| METHOD | GEL METHOD |  |  |",
+    ].join("\n");
+
+    expect(parseObservations(md).map((o) => o.name)).toEqual(["ABO SYSTEM", "RHESUS SYSTEM"]);
+  });
+
   it("drops a bold panel-heading row that has no value", () => {
     const md = [
       "| Test Name | Results | Units | Ref. Interval |",

@@ -94,6 +94,7 @@ const NON_OBSERVATION_NAMES = [
   "registeredon",
   "approvedby",
   "instrument",
+  "method",
   "panel",
   "department",
 ];
@@ -331,9 +332,10 @@ function looksLikeRowIndex(rows: string[][], index: number): boolean {
 /**
  * Decides whether a table holds observations at all, and which column is which.
  *
- * The gate: a table qualifies when either two of its rows carry a plain numeric value
- * in the same column, or one row carries a scalar value and the table has a column of
- * recognised units.
+ * The gate: a table qualifies when two of its rows carry a plain numeric value in the
+ * same column, or one row carries a scalar value and the table has a column of
+ * recognised units, or — for a panel with no numbers at all — its header names both a
+ * test and a result column and two rows carry a non-range-like value there.
  *
  * A lab result is a scalar (`15.00`, `<0.01`); a reference guide holds thresholds and
  * bands in every column (`<70`, `4.0-5.6`, `≥6.5`). Header matching alone is not
@@ -363,10 +365,13 @@ function classifyColumns(rows: string[][], headerIndex: number): TableColumns | 
   const unitColumn =
     findUnitColumn(dataRows, columnCount, new Set()) ??
     pickColumn(dataRows, columnCount, new Set(), isPseudoUnitShaped);
-  const valueColumn = findValueColumn(dataRows, columnCount, unitColumn !== undefined);
+  const header = headerIndex === -1 ? undefined : rows[headerIndex];
+
+  const valueColumn =
+    findValueColumn(dataRows, columnCount, unitColumn !== undefined) ??
+    findQualitativeValueColumn(dataRows, columnCount, header);
   if (valueColumn === null) return null;
 
-  const header = headerIndex === -1 ? undefined : rows[headerIndex];
   return combineClassification(dataRows, columnCount, valueColumn, header);
 }
 
@@ -395,6 +400,44 @@ function findValueColumn(
   if (bestPlain !== null) return bestPlain.index;
   if (hasUnitColumn && bestScalar !== null) return bestScalar.index;
   return null;
+}
+
+/**
+ * The acceptance path for a panel that is qualitative from end to end — a blood group
+ * report prints no numbers and no units at all, so neither numeric path can fire.
+ *
+ * Both conditions are load-bearing. The header must name a test column *and* a result
+ * column, which is what keeps the demographics block out: Marker emits it with a blank
+ * header row, so it can never match. And at least two rows must carry a value that is
+ * not range-like, which is what keeps the risk-category and banded-reference tables out
+ * — their headers do match, but every value cell in them is a threshold or a band.
+ */
+function findQualitativeValueColumn(
+  rows: string[][],
+  columnCount: number,
+  header: string[] | undefined,
+): number | null {
+  if (header === undefined) return null;
+
+  const headerColumn = (pattern: RegExp): number | undefined => {
+    for (let index = 0; index < columnCount; index++) {
+      if (pattern.test(cellAt(header, index))) return index;
+    }
+    return undefined;
+  };
+
+  const nameColumn = headerColumn(HEADER_PATTERNS.name);
+  const valueColumn = headerColumn(HEADER_PATTERNS.value);
+  if (nameColumn === undefined || valueColumn === undefined || nameColumn === valueColumn) {
+    return null;
+  }
+
+  const qualitative = rows.filter((row) => {
+    const cell = cellAt(row, valueColumn).trim();
+    return cell !== "" && !RANGE_LIKE.test(cell);
+  }).length;
+
+  return qualitative >= 2 ? valueColumn : null;
 }
 
 function findUnitColumn(
