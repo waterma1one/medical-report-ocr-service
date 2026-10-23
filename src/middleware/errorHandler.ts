@@ -64,7 +64,7 @@ export function errorHandler(err: unknown, req: Request, res: Response, _next: N
 
   if (isAppError(err)) {
     // Upstream/validation errors may wrap document content in their cause chain.
-    // Never log message bodies above debug — see README "PHI" note.
+    // Never log message bodies above debug — see README "Privacy" note.
     logger.error({ requestId: req.id, code: err.code, err }, "request failed");
     send(res, err.status, err.code, err.message);
     return;
