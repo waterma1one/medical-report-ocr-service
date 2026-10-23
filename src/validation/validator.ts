@@ -30,8 +30,8 @@ export function validateObservation(mapped: MappedObservation): ValidationIssue[
       message: "The test was reported but no result value could be read",
     });
   } else {
-    // "Value is a valid number (not a string like '11.2*')" — the assignment's own
-    // example. Checked against the value as printed, not the number recovered from
+    // "Value is a valid number (not a string like '11.2*')" — a value with a
+    // trailing flag. Checked against the value as printed, not the number recovered from
     // it: the trailing flag is stripped to get a usable 11.2, but that flag was
     // clinically meaningful, so the row still deserves a human look.
     const trimmedValue = raw.rawValue.trim();

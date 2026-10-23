@@ -14,7 +14,7 @@ interface LoincEntry extends LoincCode {
 // (clinicaltables.nlm.nih.gov/api/loinc_items/v3/search) before being added here —
 // none of these are guessed. Aliases are drawn from the fixture panel (Dr Lal
 // PathLabs) and common Indian-lab phrasing; a handful of correctly-aliased codes beats
-// a long list of exact-match-only ones, since LOINC is a bonus and a miss must
+// a long list of exact-match-only ones, since LOINC coding is optional and a miss must
 // degrade silently to code.text rather than fail the request.
 const ENTRIES: LoincEntry[] = [
   { code: "718-7", display: "Hemoglobin", aliases: ["haemoglobin", "hb", "hgb"] },

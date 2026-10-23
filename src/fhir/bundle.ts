@@ -2,9 +2,9 @@ import type { MappedObservation } from "./mapper.js";
 
 // meta.needsReview is not a valid FHIR R4 element — Meta only defines id, extension,
 // versionId, lastUpdated, source, profile, security and tag (verified against the R4
-// StructureDefinition). The assignment's own example response puts it there anyway,
-// and matching the stated contract is the deliberate choice here; see the README for
-// the conformant alternative (a Meta.extension).
+// StructureDefinition). It is kept here as a deliberate, documented deviation so clients
+// can read the list at the top level; see the README for the conformant
+// alternative (a Meta.extension).
 interface BundleMetaWithReviewFlags extends fhir4.Meta {
   needsReview?: string[];
 }

@@ -25,7 +25,7 @@ describe("validateObservation", () => {
     expect(validateObservation(mapped({}))).toEqual([]);
   });
 
-  it("flags the assignment's own example of a dirty value: '11.2*'", () => {
+  it("flags a value with a trailing marker: '11.2*'", () => {
     const issues = validateObservation(mapped({ rawValue: "11.2*", value: 11.2 }));
     expect(issues).toContainEqual(
       expect.objectContaining({ code: "VALUE_NOT_A_CLEAN_NUMBER" }),
