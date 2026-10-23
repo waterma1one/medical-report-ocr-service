@@ -13,7 +13,6 @@ Collected : 7/11/2023 11:08:00AM
 A/c Status : P  
 Collected at : LPL-ROHINI (NATIONAL REFERENCE LAB)  
 [lab address removed]  
-[lab address removed]  
 Age : 25 Years  
 Gender : Male  
 Reported : 17/1/2024 10:55:48AM  
@@ -67,7 +66,6 @@ Ref By : SELF
 Collected : 7/11/2023 11:08:00AM  
 A/c Status : P  
 Collected at : LPL-ROHINI (NATIONAL REFERENCE LAB)  
-[lab address removed]  
 [lab address removed]  
 Age : 25 Years  
 Gender : Male  
@@ -126,7 +124,6 @@ Ref By : SELF
 Collected : 7/11/2023 11:08:00AM  
 A/c Status : P  
 Collected at : LPL-ROHINI (NATIONAL REFERENCE LAB)  
-[lab address removed]  
 [lab address removed]  
 Age : 25 Years  
 Gender : Male  
@@ -187,9 +184,9 @@ Barcode
 | Collected    | : 7/11/2023 11:08:00AM                         | Report Status | : Revised                               |
 | A/c Status   | : P                                            | Processed at  | : LPL-NATIONAL REFERENCE LAB            |
 | Collected at | : LPL-ROHINI (NATIONAL REFERENCE LAB)          |               |                                         |
-|              | [lab address removed] |               | [lab address removed] |
-|              | [lab address removed]                                     |               | [lab address removed]    |
-|              | [lab address removed]                                   |               |                                         |
+|              | [lab address removed]                        |               | [lab address removed]                 |
+|              |                                                |               |                                         |
+|              |                                                |               |                                         |
 
 ![MC-2113 logo](16d86083b7ebdc40c0647a1d3d46ace7_img.jpg)
 
@@ -229,8 +226,6 @@ Collected : 7/11/2023 11:08:00AM
 A/c Status : P  
 Collected at : LPL-ROHINI (NATIONAL REFERENCE LAB)  
 [lab address removed]  
-[lab address removed]  
-[lab address removed]
 
 Age : 25 Years  
 Gender : Male  
@@ -238,7 +233,7 @@ Reported : 17/1/2024 10:55:48AM
 Report Status : Revised  
 Processed at : LPL-NATIONAL REFERENCE LAB  
 National Reference laboratory, Block  
-[lab address removed]
+[lab address removed]  
 
 ![MC-2113 logo](17a042ee648d9fdaddb609aead503980_img.jpg)
 
@@ -282,7 +277,6 @@ Ref By : SELF
 Collected : 7/11/2023 11:08:00AM  
 A/c Status : P  
 Collected at : LPL-ROHINI (NATIONAL REFERENCE LAB)  
-[lab address removed]  
 [lab address removed]
 
 Age : 25 Years  
@@ -340,7 +334,6 @@ Ref By : SELF
 Collected : 7/11/2023 11:08:00AM  
 A/c Status : P  
 Collected at : LPL-ROHINI (NATIONAL REFERENCE LAB)  
-[lab address removed]  
 [lab address removed]
 
 Age : 25 Years  
@@ -364,8 +357,8 @@ MC-2113 logo
 
 |                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                          |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img alt="Signature of Dr. [name removed]" data-bbox="119 750 247 817" src="8d0f0e0fe25b320c33272c52aec1fbca_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Pathology<br>Technical Director - Hematology & Immunology<br>NRL - Dr Lal PathLabs Ltd | <img alt="Signature of Dr. [name removed]" data-bbox="470 750 598 817" src="c1e4487e48462435243c9e117557e045_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>DM(Hematopathology),<br>MD,DNB,MNAMS<br>Senior Consultant and Lead-Hematopathology<br>NRL - Dr Lal PathLabs Ltd | <img alt="Signature of Dr. Himanshu Mazumdar" data-bbox="821 750 949 817" src="8823fcf8e90563a144be0b7cea058423_img.jpg"/><br>[reg. no. removed]<br>Dr. Himanshu Mazumdar<br>MD, Biochemistry<br>Consultant Biochemist<br>Dr Lal PathLabs Ltd | <img alt="Signature of Dr. Jyoti Munjal" data-bbox="1173 750 1300 817" src="38006c13f313e4b0b98e8b2a7226a5e4_img.jpg"/><br>[reg. no. removed]<br>Dr. Jyoti Munjal<br>MD, Pathology<br>Consultant Pathologist<br>Dr Lal PathLabs Ltd                             |
-| <img alt="Signature of Dr. [name removed]" data-bbox="119 1019 247 1086" src="595a15aafd07edeab1c6610af4a59852_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Biochemistry<br>Consultant Biochemist<br>NRL - Dr Lal PathLabs Ltd                   | <img alt="Signature of Dr. [name removed]" data-bbox="470 1019 726 1086" src="1e08df403f10e7d8b1ad99531560691e_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Biochemistry<br>Technical Director - Clinical Chemistry & Biochemical Genetics<br>NRL - Dr Lal PathLabs Ltd    | <img alt="Signature of Dr. Sarita Kumari Lal" data-bbox="821 1019 981 1086" src="41c5e00e78da40d8550fc6bf217cebde_img.jpg"/><br>[reg. no. removed]<br>Dr. Sarita Kumari Lal<br>MD, Pathology<br>Consultant Pathologist<br>Dr Lal PathLabs Ltd | <img alt="Signature of Dr. Sunanda" data-bbox="1173 1019 1332 1086" src="9c4615fb16380549470a58dd185b159b_img.jpg"/><br>[reg. no. removed]<br>Dr. Sunanda<br>MD, Pathology<br>Sr. Consultant Pathologist - Hematology & Immunology<br>NRL - Dr Lal PathLabs Ltd |
+| <img alt="Signature of Dr. [name removed]" data-bbox="119 750 247 817" src="8d0f0e0fe25b320c33272c52aec1fbca_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Pathology<br>Technical Director - Hematology & Immunology<br>NRL - Dr Lal PathLabs Ltd | <img alt="Signature of Dr. [name removed]" data-bbox="470 750 598 817" src="c1e4487e48462435243c9e117557e045_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>DM(Hematopathology),<br>MD,DNB,MNAMS<br>Senior Consultant and Lead-Hematopathology<br>NRL - Dr Lal PathLabs Ltd | <img alt="Signature of Dr. [name removed]" data-bbox="821 750 949 817" src="8823fcf8e90563a144be0b7cea058423_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Biochemistry<br>Consultant Biochemist<br>Dr Lal PathLabs Ltd | <img alt="Signature of Dr. Jyoti Munjal" data-bbox="1173 750 1300 817" src="38006c13f313e4b0b98e8b2a7226a5e4_img.jpg"/><br>[reg. no. removed]<br>Dr. Jyoti Munjal<br>MD, Pathology<br>Consultant Pathologist<br>Dr Lal PathLabs Ltd                             |
+| <img alt="Signature of Dr. [name removed]" data-bbox="119 1019 247 1086" src="595a15aafd07edeab1c6610af4a59852_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Biochemistry<br>Consultant Biochemist<br>NRL - Dr Lal PathLabs Ltd                   | <img alt="Signature of Dr. [name removed]" data-bbox="470 1019 726 1086" src="1e08df403f10e7d8b1ad99531560691e_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Biochemistry<br>Technical Director - Clinical Chemistry & Biochemical Genetics<br>NRL - Dr Lal PathLabs Ltd    | <img alt="Signature of Dr. [name removed]" data-bbox="821 1019 981 1086" src="41c5e00e78da40d8550fc6bf217cebde_img.jpg"/><br>[reg. no. removed]<br>Dr. [name removed]<br>MD, Pathology<br>Consultant Pathologist<br>Dr Lal PathLabs Ltd | <img alt="Signature of Dr. Sunanda" data-bbox="1173 1019 1332 1086" src="9c4615fb16380549470a58dd185b159b_img.jpg"/><br>[reg. no. removed]<br>Dr. Sunanda<br>MD, Pathology<br>Sr. Consultant Pathologist - Hematology & Immunology<br>NRL - Dr Lal PathLabs Ltd |
 
 This is a revised report & supersedes all the previously issued reports
 
