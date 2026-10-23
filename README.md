@@ -189,7 +189,7 @@ npm test          # vitest run
 npm run typecheck # type-checks src and tests
 ```
 
-167 tests across 12 files, all passing (counted from `vitest run` output). The suite needs no credentials or network: Datalab calls are mocked, and the parser, mapper and regression tests run against `tests/fixtures/lalpath-cbc-panel.md`, a saved Datalab response for the bundled sample report. Validation checks are covered in `tests/validation.test.ts`.
+167 tests across 12 files, all passing (counted from `vitest run` output). The suite needs no credentials or network: Datalab calls are mocked, and the parser, mapper and regression tests run against `tests/fixtures/lalpath-cbc-panel.md`, a saved Datalab response for the bundled sample report. The sample PDF and fixtures have the signing doctors' names and the lab address removed. Validation checks are covered in `tests/validation.test.ts`.
 
 ## Project layout
 
