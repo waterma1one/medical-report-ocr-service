@@ -1,13 +1,8 @@
 import type { MappedObservation } from "./mapper.js";
 
-// meta.needsReview is not a valid FHIR R4 element — Meta only defines id, extension,
-// versionId, lastUpdated, source, profile, security and tag (verified against the R4
-// StructureDefinition). It is kept here as a deliberate, documented deviation so clients
-// can read the list at the top level; see the README for the conformant
-// alternative (a Meta.extension).
-interface BundleMetaWithReviewFlags extends fhir4.Meta {
-  needsReview?: string[];
-}
+// R4 Meta has no needsReview element, so each name is carried as a Meta.extension with
+// a valueString. The URL is an identifier, not a published StructureDefinition.
+export const NEEDS_REVIEW_EXTENSION_URL = "urn:medical-report-ocr-service:needs-review";
 
 export function buildBundle(
   observations: MappedObservation[],
@@ -18,9 +13,12 @@ export function buildBundle(
     resource: observation,
   }));
 
-  const meta: BundleMetaWithReviewFlags = { source: "ocr-extraction" };
+  const meta: fhir4.Meta = { source: "ocr-extraction" };
   if (needsReview.length > 0) {
-    meta.needsReview = [...new Set(needsReview)];
+    meta.extension = [...new Set(needsReview)].map((name) => ({
+      url: NEEDS_REVIEW_EXTENSION_URL,
+      valueString: name,
+    }));
   }
 
   return {

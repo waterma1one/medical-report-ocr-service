@@ -2540,11 +2540,23 @@
   ],
   "meta": {
     "source": "ocr-extraction",
-    "needsReview": [
-      "GFR Category (KDIGO Guideline 2012)",
-      "BUN/Creatinine Ratio (Calculated)",
-      "Uric Acid (Uricase)",
-      "A : G Ratio (Calculated)"
+    "extension": [
+      {
+        "url": "urn:medical-report-ocr-service:needs-review",
+        "valueString": "GFR Category (KDIGO Guideline 2012)"
+      },
+      {
+        "url": "urn:medical-report-ocr-service:needs-review",
+        "valueString": "BUN/Creatinine Ratio (Calculated)"
+      },
+      {
+        "url": "urn:medical-report-ocr-service:needs-review",
+        "valueString": "Uric Acid (Uricase)"
+      },
+      {
+        "url": "urn:medical-report-ocr-service:needs-review",
+        "valueString": "A : G Ratio (Calculated)"
+      }
     ]
   }
 }

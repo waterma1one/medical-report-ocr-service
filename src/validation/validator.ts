@@ -18,7 +18,7 @@ const GROSS_FACTOR = 10;
 /**
  * Sanity checks run before an Observation is returned. None of these reject the
  * Observation — a failure here means it ships in the Bundle with its name added to
- * meta.needsReview and the specific issues attached as notes.
+ * the Bundle's needs-review extension and the specific issues attached as notes.
  */
 export function validateObservation(mapped: MappedObservation): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
@@ -152,7 +152,7 @@ export interface ReviewedObservation extends MappedObservation {
 /**
  * Runs validation across the set, attaching each Observation's issues to it as FHIR
  * notes so the reason for a review flag reaches the client, and returning the names
- * for meta.needsReview.
+ * for the Bundle's needs-review extension.
  */
 export function reviewObservations(observations: MappedObservation[]): {
   reviewed: ReviewedObservation[];
@@ -166,7 +166,7 @@ export function reviewObservations(observations: MappedObservation[]): {
     const issues = validateObservation(mapped);
     if (issues.length > 0) {
       // Observation.note carries the specific reason each entry was flagged. Without
-      // it the client sees only a name in meta.needsReview and cannot tell a
+      // it the client sees only a name in the Bundle's needs-review extension and cannot tell a
       // discarded abnormality flag from a unit mismatch — different follow-ups.
       mapped.observation.note = issues.map((issue) => ({
         text: `${issue.code}: ${issue.message}`,
