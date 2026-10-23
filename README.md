@@ -1,76 +1,52 @@
 # medical-report-ocr
 
-A Node.js service that takes a diagnostic report (image or PDF), OCRs it with the
-Datalab Marker API, and returns the detected lab observations as a FHIR R4 `Bundle`.
-It's a single endpoint — `POST /extract` — with the OCR call, the markdown parsing, the
-FHIR mapping, and the validation kept in separate modules so each piece can be tested
-and reasoned about on its own.
+A Node.js service for developers who need structured lab results from scanned or PDF diagnostic reports: it OCRs the report with the Datalab Marker API and returns the lab observations as a FHIR R4 `Bundle`.
 
-## Quick start
+## Demo
 
-You can run this two ways: with a Datalab account, or without one.
+No live deployment yet. The repo includes a Render blueprint (`render.yaml`) for a free-tier Docker deploy.
 
-### Without a Datalab account
+<!-- SCREENSHOT: terminal showing `curl -X POST /extract` against examples/sample-lab-report.pdf and the start of the returned Bundle. Save as docs/screenshot.png -->
 
-```bash
-npm install
-cp .env.example .env
-# edit .env: set API_BEARER_TOKEN to anything, and set OCR_PROVIDER=fixture
-npm run dev
+## What it does
+
+- One endpoint, `POST /extract`, takes a single JPEG, PNG, WebP or PDF upload (field name `file`, 10 MB default limit) behind a static bearer token.
+- Checks the file type by magic bytes, not the client-declared `Content-Type`.
+- Sends the file to Datalab, polls until the result is ready, and handles a `result_url` in place of inline markdown, `success: false` on an HTTP 200, and `429` rate limiting with `Retry-After` backoff.
+- Parses the returned markdown tables into observations, skipping tables that look like results but are reference-band or risk-category guides.
+- Maps each row to a FHIR R4 `Observation` (`status: preliminary`) with `valueQuantity`, `valueString` for qualitative results, or `dataAbsentReason` when the result cell is empty, plus `referenceRange` and `interpretation`.
+- Adds a LOINC coding when the test name matches one of 46 codes in a local alias table (British spellings and common Indian-lab abbreviations such as `TLC`, `PCV`, `S. Creatinine`). Units resolve to UCUM through a static lookup table.
+- Runs sanity checks on every observation (missing value, non-numeric value, missing unit, incoherent range, unit mismatch, implausible value that looks like a dropped decimal point). Flagged observations get a FHIR `note` and their name in `meta.needsReview`; nothing is rejected.
+- Fixture mode (`OCR_PROVIDER=fixture`) replays a saved Datalab response so the whole pipeline runs without an account or network access.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    client([Client]) -->|POST /extract multipart| auth[requireAuth<br/>bearer token]
+    auth --> upload[uploadSingleFile<br/>multer memoryStorage]
+    upload --> sniff[sniffMiddleware<br/>magic-byte check]
+    sniff --> ocr{ocrProvider}
+    ocr -->|OCR_PROVIDER=datalab| datalab[datalabProvider<br/>submit, poll, fetch result]
+    ocr -->|OCR_PROVIDER=fixture| fixture[fixtureProvider<br/>examples/sample-ocr-output.md]
+    datalab <-->|X-API-Key| api[(Datalab Marker API)]
+    datalab --> parse[parseReport<br/>markdown to RawObservation]
+    fixture --> parse
+    parse --> map[mapToObservation<br/>lookupLoinc, resolveUnit]
+    map --> review[reviewObservations<br/>notes and needsReview]
+    review --> bundle[buildBundle<br/>Bundle type collection]
+    bundle -->|200 JSON| client
+    auth -. error .-> err[errorHandler<br/>JSON error envelope]
+    sniff -. error .-> err
+    datalab -. error .-> err
+    parse -. no observations: 422 .-> err
 ```
 
-`OCR_PROVIDER=fixture` replays a real, saved Datalab response
-(`examples/sample-ocr-output.md`, captured from an actual Marker API call against
-`examples/sample-lab-report.pdf`) instead of calling the API. It exercises the entire
-pipeline — parsing, LOINC lookup, unit resolution, validation, bundle assembly — with no
-signup and no network call.
+Everything after the OCR call is a pure function over plain data, which is why the parser, mapper and validator are tested from saved fixtures and why fixture mode is the same pipeline with a stored string in place of the API call. The table filter accepts a markdown table only if two data rows carry a plain numeric value in the same column, or one row carries a scalar value and the table has a column of recognised units; real reports print reference guides with the same headers as result tables, and this rule separates the two. The implausibility check asks whether a power-of-ten rescale would bring a value back inside its range, because a "more than 10x the reference high" rule cannot catch an in-range value whose decimal point was dropped. Interpretation is left out when there is nothing to derive it from (no range, or a comparator value like `<0.5`) instead of defaulting to "Normal". `valueQuantity.system` and `.code` are set only when the unit maps to a known UCUM code; otherwise only the printed `.unit` is kept. The Datalab poll is cancelled through an `AbortController` when the client disconnects, so credits are not spent on a response nobody will read.
 
-### With a Datalab account
+## FHIR output
 
-```bash
-npm install
-cp .env.example .env
-# edit .env: set API_BEARER_TOKEN, and set DATALAB_API_KEY from datalab.to (free tier)
-npm run dev
-```
-
-Either way, the server listens on port 3000 (configurable via `PORT`).
-
-### Docker
-
-```bash
-docker compose up
-```
-
-Reads the same `.env` file. `docker compose up --build` after changing source.
-
-## Environment variables
-
-| Variable | Required | Default | Notes |
-|---|---|---|---|
-| `API_BEARER_TOKEN` | yes | — | Static token clients must send as `Authorization: Bearer <token>` |
-| `DATALAB_API_KEY` | yes, unless `OCR_PROVIDER=fixture` | — | From datalab.to. Sent as `X-API-Key`, not as a bearer token |
-| `DATALAB_API_URL` | no | `https://www.datalab.to/api/v1/marker` | See "Marker vs. Convert" below |
-| `DATALAB_MODE` | no | `balanced` | `fast` \| `balanced` \| `accurate` |
-| `DATALAB_POLL_INTERVAL_MS` | no | `2000` | |
-| `DATALAB_POLL_TIMEOUT_MS` | no | `180000` | |
-| `OCR_PROVIDER` | no | `datalab` | `datalab` \| `fixture` |
-| `OCR_FIXTURE_PATH` | no | `examples/sample-ocr-output.md` | Only read when `OCR_PROVIDER=fixture` |
-| `PORT` | no | `3000` | |
-| `MAX_FILE_SIZE_BYTES` | no | `10485760` (10 MB) | |
-| `LOG_LEVEL` | no | `info` | pino level |
-
-## Example request
-
-```bash
-curl -X POST http://localhost:3000/extract \
-  -H "Authorization: Bearer $API_BEARER_TOKEN" \
-  -F "file=@examples/sample-lab-report.pdf;type=application/pdf"
-```
-
-A real request against a 7-page report takes 5-15 seconds — that's the Datalab
-submit-then-poll cycle, not something wrong with this service. A trimmed real response,
-captured from an actual run:
+A trimmed entry from the saved run in `examples/sample-fhir-bundle.json` (54 observations from the 7-page sample report):
 
 ```json
 {
@@ -88,12 +64,7 @@ captured from an actual run:
           "text": "Hemoglobin (Photometry)",
           "coding": [{ "system": "http://loinc.org", "code": "718-7", "display": "Hemoglobin" }]
         },
-        "valueQuantity": {
-          "value": 15,
-          "unit": "g/dL",
-          "system": "http://unitsofmeasure.org",
-          "code": "g/dL"
-        },
+        "valueQuantity": { "value": 15, "unit": "g/dL", "system": "http://unitsofmeasure.org", "code": "g/dL" },
         "referenceRange": [
           {
             "low": { "value": 13, "unit": "g/dL", "system": "http://unitsofmeasure.org", "code": "g/dL" },
@@ -121,166 +92,135 @@ captured from an actual run:
 }
 ```
 
-The full response from that run — 54 observations from the sample report — is saved at
-`examples/sample-fhir-bundle.json`.
+**`meta.needsReview` is not valid FHIR R4.** R4 `Meta` only defines `id`, `extension`, `versionId`, `lastUpdated`, `source`, `profile`, `security` and `tag`, so a strict validator will reject this field. The per-observation `note` carries the same information in a conformant place. A fully conformant version would move the list into a `Meta.extension` with its own `StructureDefinition` URL.
+
+No patient identity or demographics are extracted. `Observation.subject` is omitted, which R4 allows (`0..1`).
 
 ## Errors
 
-| Status | When |
-|---|---|
-| 400 | No file uploaded, unsupported file type, or the field name isn't `file` |
-| 401 | Missing or invalid bearer token |
-| 422 | OCR completed but no observations could be extracted from the report |
-| 500 | Upstream OCR failure — the response carries a message, never a stack trace |
+All errors use the envelope `{ "error": { "code": "...", "message": "..." } }`.
 
-`GET /health` returns 200 unconditionally as long as the process is up. It doesn't call
-Datalab — a liveness check that depends on a third-party API spends that API's quota on
-every probe and ties this service's uptime to theirs.
+| Status | Codes | When |
+|---|---|---|
+| 400 | `NO_FILE_UPLOADED`, `UNSUPPORTED_FILE_TYPE`, `FILE_TOO_LARGE`, `UNEXPECTED_FIELD`, `TOO_MANY_FILES`, `MALFORMED_UPLOAD` | Bad or missing upload |
+| 401 | `UNAUTHORIZED` | Missing or wrong bearer token |
+| 404 | `NOT_FOUND` | Unknown route |
+| 422 | `NO_OBSERVATIONS_FOUND` | OCR finished but no observations were parsed |
+| 500 | `OCR_UPSTREAM_ERROR`, `INTERNAL_ERROR` | Datalab failure or unexpected error; no stack trace in the body |
 
-## Architecture
+`GET /health` returns `{ "status": "ok", "uptimeSeconds": n }` without auth and without calling Datalab, so probes do not spend API quota or tie this service's uptime to Datalab's.
+
+## Stack
+
+- Node.js 22+, TypeScript 5.9 (ES modules)
+- Express 5, multer 2 (in-memory uploads), zod 4 (env validation), pino and pino-http (logging)
+- `@types/fhir` for R4 resource types
+- Vitest 4 and supertest for tests
+- Docker (`node:22-alpine`, multi-stage, non-root user, `HEALTHCHECK` on `/health`), Docker Compose, Render blueprint
+- External: Datalab Marker API for OCR
+
+## Run it locally
+
+Requires Node.js 22 or newer. The server listens on port 3000 by default.
+
+**Without a Datalab account (fixture mode):**
+
+```bash
+npm install
+cp .env.example .env
+# in .env: set API_BEARER_TOKEN to any value and OCR_PROVIDER=fixture
+npm run dev
+```
+
+Fixture mode replays `examples/sample-ocr-output.md`, a saved Datalab response for `examples/sample-lab-report.pdf`. It still checks auth and the uploaded file's type, but returns the same 54-observation Bundle whatever file you send.
+
+**With a Datalab account:**
+
+```bash
+npm install
+cp .env.example .env
+# in .env: set API_BEARER_TOKEN and DATALAB_API_KEY (from datalab.to)
+npm run dev
+```
+
+**Docker:**
+
+```bash
+cp .env.example .env   # then edit as above
+docker compose up --build
+```
+
+**Try it:**
+
+```bash
+curl -X POST http://localhost:3000/extract \
+  -H "Authorization: Bearer $API_BEARER_TOKEN" \
+  -F "file=@examples/sample-lab-report.pdf;type=application/pdf"
+```
+
+**Production build:** `npm run build && npm start` (runs `dist/index.js`).
+
+### Environment variables
+
+| Variable | Required | Default | Notes |
+|---|---|---|---|
+| `API_BEARER_TOKEN` | yes | none | Clients send `Authorization: Bearer <token>`; compared with `timingSafeEqual` |
+| `DATALAB_API_KEY` | yes, unless `OCR_PROVIDER=fixture` | none | Sent as `X-API-Key` |
+| `DATALAB_API_URL` | no | `https://www.datalab.to/api/v1/marker` | Datalab submit endpoint; override to point at a different Datalab endpoint |
+| `DATALAB_MODE` | no | `balanced` | `fast`, `balanced` or `accurate` |
+| `DATALAB_POLL_INTERVAL_MS` | no | `2000` | |
+| `DATALAB_POLL_TIMEOUT_MS` | no | `180000` | |
+| `OCR_PROVIDER` | no | `datalab` | `datalab` or `fixture` |
+| `OCR_FIXTURE_PATH` | no | `examples/sample-ocr-output.md` | Read only in fixture mode |
+| `PORT` | no | `3000` | |
+| `MAX_FILE_SIZE_BYTES` | no | `10485760` (10 MB) | |
+| `LOG_LEVEL` | no | `info` | pino level |
+
+The service validates these with zod at startup and refuses to start, listing each problem, if any are invalid. `request_check_url` and `result_url` from Datalab are only fetched if they are https and on the same host as `DATALAB_API_URL`, so a misconfigured or spoofed response cannot send the API key elsewhere.
+
+### Deploy to Render
+
+`render.yaml` defines a free-plan Docker web service with a health check on `/health`. Render generates `API_BEARER_TOKEN`; enter `DATALAB_API_KEY` in the dashboard on first deploy. The blueprint sets `DATALAB_MODE=fast` and `DATALAB_POLL_TIMEOUT_MS=90000` so a cold start plus OCR stays within the proxy timeout.
+
+## Tests
+
+```bash
+npm test          # vitest run
+npm run typecheck # type-checks src and tests
+```
+
+167 tests across 12 files, all passing (counted from `vitest run` output). The suite needs no credentials or network: Datalab calls are mocked, and the parser, mapper and regression tests run against `tests/fixtures/lalpath-cbc-panel.md`, a saved Datalab response for the bundled sample report. Validation checks are covered in `tests/validation.test.ts`.
+
+## Project layout
 
 ```
-POST /extract
-  -> auth (bearer token)
-  -> upload (multer, memory storage) + magic-byte sniff
-  -> ocr/            submit to Datalab, poll, return markdown
-  -> parsing/         markdown -> RawObservation[]
-  -> fhir/            RawObservation -> Observation, then -> Bundle
-  -> validation/      Observation -> review flags
+src/
+  app.ts, index.ts   Express app setup, request ids, 404 and error handling
+  config.ts          zod-validated environment config
+  routes/            POST /extract pipeline and GET /health
+  middleware/        bearer auth, multer upload and magic-byte sniff, error envelope
+  upload/            file signature detection (PDF, JPEG, PNG, WebP)
+  ocr/               Datalab client (submit, poll, result fetch) and fixture provider
+  parsing/           markdown table parser, reference ranges, unit resolution
+  fhir/              Observation mapper, LOINC alias table, Bundle builder
+  validation/        per-observation checks and needsReview collection
+tests/               Vitest suites and the saved Datalab fixture
+examples/            sample PDF report, its saved OCR markdown, and the resulting Bundle
+Dockerfile, docker-compose.yml, render.yaml
 ```
 
-Each arrow above `ocr/` is a pure function over plain data. That's what makes the parser,
-mapper and validator testable from fixtures without a network call, and it's why
-`OCR_PROVIDER=fixture` exists at all — it's the same pipeline, just with a saved string
-in place of a live API call.
+## Privacy
 
-- **`ocr/`** — submits to Datalab, polls `request_check_url`, and normalizes the result.
-  Handles the cases that don't show up until you actually call the API: the poll
-  response can hand back a signed `result_url` instead of inlining `markdown`;
-  `success: false` can arrive with an HTTP 200; the free tier rate-limits at 10
-  requests/minute.
-- **`parsing/`** — turns Datalab's markdown into `RawObservation[]`. Lab reports are
-  markdown tables, but not every table is a result table — real reports embed
-  risk-category and reference-band tables using the exact same headers as the actual
-  results. A table is accepted only if two of its data rows carry a plain numeric value
-  in the same column, or one row carries a scalar value and the table has a column of
-  recognised units. A lab result is a scalar (`15.00`, `<0.01`); a reference guide holds
-  thresholds and bands in every column. The unit clause is what lets a single-analyte
-  report and an all-comparator panel (a cardiac panel where every value is `<0.01`)
-  through, since a reference guide has no unit column to offer.
-- **`fhir/`** — maps a `RawObservation` to a FHIR R4 `Observation`, adds a LOINC coding
-  on a match, and assembles the `Bundle`.
-- **`validation/`** — the required sanity checks (a valid number, a present unit, a
-  coherent range, matching units) plus one heuristic addition for OCR decimal-point
-  errors. "11.2" read as "112" produces a numerically valid, confidently-labeled, and
-  wrong result — the most dangerous failure mode here. Note that the obvious check,
-  "more than 10x the reference high", cannot catch it: a 10x shift of a true value V
-  only exceeds `high * 10` when `V > high`, so any in-range result that gets shifted
-  is invisible to it. Instead the check asks whether a power-of-ten rescale would
-  bring the value back inside a bounded range — if dividing by ten explains it, a
-  dropped decimal point is the likely story. Failures don't reject the Observation;
-  they attach the reason as a FHIR `note` and add the name to `meta.needsReview`.
+Report content is treated as PHI. The service never logs OCR output or observation values. Each extraction logs counts only: pages, tables seen and accepted, rows seen, observations emitted, and rows dropped by reason, which is enough to spot a systematically empty parse without putting report content in a log line. Request logs carry only id, method, URL and status code.
 
-## Design decisions and trade-offs
-
-**`meta.needsReview` is not valid FHIR R4.** The `Meta` element only defines `id`,
-`extension`, `versionId`, `lastUpdated`, `source`, `profile`, `security` and `tag` — it
-has no room for an arbitrary array. The example response in the assignment puts one
-there anyway. This service matches the assignment's example exactly, because that's the
-contract being graded against; a spec-conformant alternative would carry the same
-information as a `Meta.extension` with a custom `StructureDefinition` URL.
-
-**The Marker endpoint the assignment names is deprecated by Datalab in favor of
-`/api/v1/convert`.** The two have an identical contract for every field this service
-uses. `DATALAB_API_URL` makes the swap a one-line env change; the default follows the
-assignment's literal wording.
-
-**`interpretation` is omitted, not guessed, when there's nothing to derive it from.**
-`Observation.interpretation` is optional (`0..*`), so a missing interpretation is
-honest, whereas assigning "Normal" to a value with no reference range would be an
-unearned clinical claim. Same reasoning for a comparator-bounded value like `<0.5` — the
-true value already sits on one side of a stated bound, and deriving L/H/N on top of that
-would be restating an uncertainty that's already been expressed once, correctly, via
-FHIR's own `Quantity.comparator`.
-
-**`valueQuantity.system` and `.code` are set together or not at all.** If a report's
-unit doesn't resolve to a known UCUM code, the response keeps the printed unit in
-`.unit` and leaves `.system`/`.code` off, rather than asserting a UCUM correspondence
-that isn't actually known to be correct.
-
-**File type is checked by magic bytes, not by the client-declared Content-Type.** The
-declared MIME type is attacker-controlled; a file named `report.jpg` can contain
-anything. The declared type is used only as a cheap first-pass rejection before the
-buffer is even read; the actual check is the first bytes of the file.
-
-**LOINC coverage is deliberately narrow with aliases, not broad and exact-match.** A
-lookup keyed only on `"Hemoglobin"` misses almost everything a real report prints:
-`Haemoglobin`, `TLC`, `PCV`, `S. Creatinine`, method suffixes like `AST (SGOT)
-(IFCC without P5P)`. Around 45 codes with British-spelling and Indian-lab-abbreviation
-aliases returns more real matches than a much longer list of exact strings would. LOINC
-is explicitly a bonus in the assignment; a miss degrades silently to `code.text` and
-never blocks a response.
-
-**UCUM handling is a static lookup table, not a full validator.** Libraries like
-`@lhncbc/ucum-lhc` exist for this, but a documented map covering the units that
-actually appear on CBC/LFT/lipid/thyroid panels is proportionate to a 4-6 hour scope,
-and every entry here was checked against the UCUM spec, not guessed.
-
-**`/health` is intentionally shallow.** It reports that the process is up; it does not
-call Datalab. A liveness probe that depends on a third-party API spends that API's
-quota on every check and couples this service's uptime to theirs — that's the wrong
-trade for a health check.
-
-**Patient data.** The bundled sample report (`examples/sample-lab-report.pdf`) is a
-publicly published sample from Dr Lal PathLabs with a placeholder patient
-(`Mr. DUMMY`) — not a real patient. This service never logs OCR output or observation
-values. What it does log per extraction is counts only — pages, tables seen vs.
-accepted, rows seen, observations emitted, and rows dropped by reason — which is enough
-to notice a systematically empty parse in production without putting any report content
-in a log line. Document content from a real report is PHI, and the assignment
-explicitly asks candidates to test against real lab reports, so that boundary is
-treated as a hard rule rather than an afterthought.
+The bundled sample report uses a placeholder patient name, not a real patient.
 
 ## Known limitations
 
-- **The sample report is a clean digital PDF, not a camera photo.** It exercises the
-  full pipeline against a genuine Indian-lab layout, but not the skew, blur or lighting
-  artifacts a phone photo would introduce. The parser's noise rejection and range
-  parsing were built and tested against this fixture; a photographed report with heavier
-  OCR damage may need parser adjustments this codebase hasn't seen yet.
-- **Two-column report layouts** (some labs print two test tables side by side, which
-  Marker can merge into one wide table) aren't specifically handled and would likely
-  have their second half dropped by the current column classifier.
-- **Wrapped test names** that split across two markdown table rows are not merged back
-  together; the row is more likely to be dropped by the noise filter than mis-parsed.
-- **Test names longer than 80 characters are truncated** (with an ellipsis) rather than
-  dropped, so a very long name plus method annotation stays as `code.text` but loses
-  its tail.
-- **The OCR model itself is occasionally wrong.** In the bundled sample, one value
-  Datalab read differs from what a plain-text extraction of the same PDF shows. That
-  is exactly the class of error `needsReview` and the implausibility check exist to
-  surface, not something a smarter parser can fix after the fact.
-
-## Testing
-
-```bash
-npm test
-```
-
-Everything except the OCR network call is a pure function over fixtures, so the suite
-runs in well under a second and needs no credentials. The parser and mapper tests run
-against `tests/fixtures/lalpath-cbc-panel.md`, which is the real, saved output of an
-actual Datalab call against the bundled sample report — not synthetic markdown. The
-required validation-layer test is `tests/validation.test.ts`.
-
-## Assumptions
-
-- A single `file` field, one file per request, as specified.
-- No patient identity or demographics are extracted or included in the response — the
-  assignment's example response contains none, and this service follows that.
-- `Observation.subject` is omitted. There's no patient context to reference, and R4
-  makes `subject` optional (`0..1`) for exactly this situation.
-- Multi-page PDFs are supported by concatenating observations across all pages (the
-  bonus item); observations aren't deduplicated across pages, since a real duplicate
-  test result is a legitimate thing for a report to contain and a naive dedupe risks
-  dropping one.
+- **The sample report is a clean digital PDF, not a camera photo.** The parser was built and tested against it, so skew, blur or heavier OCR damage from a phone photo may need parser changes.
+- **Two-column layouts** (two test tables side by side that Marker merges into one wide table) are not handled, and the second half would likely be dropped.
+- **Test names wrapped across two table rows** are not merged; the row is more likely dropped by the noise filter than mis-parsed.
+- **Test names over 80 characters are truncated** with an ellipsis.
+- **OCR errors pass through.** In the saved Datalab output for the bundled sample, the Uric Acid result cell is empty; the service emits it with `dataAbsentReason` and flags it in `needsReview` rather than guessing.
+- **Observations are not deduplicated across pages**, since a report can legitimately repeat a test.
+- **UCUM support is a static table**, not a full validator such as `@lhncbc/ucum-lhc`. Units outside it keep the printed text with no UCUM code.
