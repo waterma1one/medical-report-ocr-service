@@ -16,7 +16,7 @@ No live deployment yet. The repo includes a Render blueprint (`render.yaml`) for
 - Parses the returned markdown tables into observations, skipping tables that look like results but are reference-band or risk-category guides.
 - Maps each row to a FHIR R4 `Observation` (`status: preliminary`) with `valueQuantity`, `valueString` for qualitative results, or `dataAbsentReason` when the result cell is empty, plus `referenceRange` and `interpretation`.
 - Adds a LOINC coding when the test name matches one of 46 codes in a local alias table (British spellings and common Indian-lab abbreviations such as `TLC`, `PCV`, `S. Creatinine`). Units resolve to UCUM through a static lookup table.
-- Runs sanity checks on every observation (missing value, non-numeric value, missing unit, incoherent range, unit mismatch, implausible value that looks like a dropped decimal point). Flagged observations get a FHIR `note` and their name in `meta.needsReview`; nothing is rejected.
+- Runs sanity checks on every observation (missing value, non-numeric value, missing unit, incoherent range, unit mismatch, implausible value that looks like a dropped decimal point). Flagged observations get a FHIR `note` and their name in a `Meta.extension` on the Bundle; nothing is rejected.
 - Fixture mode (`OCR_PROVIDER=fixture`) replays a saved Datalab response so the whole pipeline runs without an account or network access.
 
 ## Architecture
@@ -87,12 +87,15 @@ A trimmed entry from the saved run in `examples/sample-fhir-bundle.json` (54 obs
   ],
   "meta": {
     "source": "ocr-extraction",
-    "needsReview": ["GFR Category (KDIGO Guideline 2012)", "BUN/Creatinine Ratio (Calculated)"]
+    "extension": [
+      { "url": "urn:medical-report-ocr-service:needs-review", "valueString": "GFR Category (KDIGO Guideline 2012)" },
+      { "url": "urn:medical-report-ocr-service:needs-review", "valueString": "BUN/Creatinine Ratio (Calculated)" }
+    ]
   }
 }
 ```
 
-**`meta.needsReview` is not valid FHIR R4.** R4 `Meta` only defines `id`, `extension`, `versionId`, `lastUpdated`, `source`, `profile`, `security` and `tag`, so a strict validator will reject this field. The per-observation `note` carries the same information in a conformant place. A fully conformant version would move the list into a `Meta.extension` with its own `StructureDefinition` URL.
+**Needs-review list.** R4 `Meta` has no `needsReview` element, so each observation name that failed a sanity check is carried as a `Meta.extension` with a `valueString` and the identifier URL `urn:medical-report-ocr-service:needs-review`. The URL is an identifier, not a published `StructureDefinition`, so a strict validator may warn about an unknown extension but will not reject the structure. The per-observation `note` carries the same information next to the value.
 
 No patient identity or demographics are extracted. `Observation.subject` is omitted, which R4 allows (`0..1`).
 
@@ -189,7 +192,7 @@ npm test          # vitest run
 npm run typecheck # type-checks src and tests
 ```
 
-167 tests across 12 files, all passing (counted from `vitest run` output). The suite needs no credentials or network: Datalab calls are mocked, and the parser, mapper and regression tests run against `tests/fixtures/lalpath-cbc-panel.md`, a saved Datalab response for the bundled sample report. The sample PDF and fixtures have the signing doctors' names and the lab address removed. Validation checks are covered in `tests/validation.test.ts`.
+169 tests across 13 files, all passing (counted from `vitest run` output). The suite needs no credentials or network: Datalab calls are mocked, and the parser, mapper and regression tests run against `tests/fixtures/lalpath-cbc-panel.md`, a saved Datalab response for the bundled sample report. The sample PDF and fixtures have the signing doctors' names and the lab address removed. Validation checks are covered in `tests/validation.test.ts`.
 
 ## Project layout
 
