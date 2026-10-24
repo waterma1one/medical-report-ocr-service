@@ -4,7 +4,9 @@ A Node.js service for developers who need structured lab results from scanned or
 
 ## Demo
 
-No live deployment yet. The repo includes a Render blueprint (`render.yaml`) for a free-tier Docker deploy.
+Deployed on a Render free instance from `render.yaml`, running with `OCR_PROVIDER=datalab`: https://medical-report-ocr-1d8c.onrender.com
+
+`GET /health` is open. `POST /extract` needs the bearer token, which is not published, so the live instance is not open for uploads. The first request after idle can take 50 seconds or more while the instance wakes.
 
 <!-- SCREENSHOT: terminal showing `curl -X POST /extract` against examples/sample-lab-report.pdf and the start of the returned Bundle. Save as docs/screenshot.png -->
 
